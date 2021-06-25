@@ -22,8 +22,8 @@ final class CharacterListInteractor: CharacterListBusinessLogic {
             switch result {
             case .success(let characters):
                 self.presenter.presentCharacterListSuccess(response: .init(marvelCharacters: characters))
-            case .failure(let error):
-                break
+            case .failure(_):
+                self.presenter.presentCharacterListError(response: .init())
             }
         }
     }

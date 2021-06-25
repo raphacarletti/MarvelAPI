@@ -2,6 +2,7 @@ import UIKit
 
 protocol CharacterListDisplayLogic: AnyObject {
     func showCharacterList(viewModel: CharacterList.FetchCharacterList.ViewModel.Success)
+    func showError(viewModel: CharacterList.FetchCharacterList.ViewModel.Failure)
 }
 
 final class CharacterListViewController: UIViewController {
@@ -36,6 +37,7 @@ final class CharacterListViewController: UIViewController {
         super.viewDidLoad()
         navigationController?.navigationBar.prefersLargeTitles = true
         title = L10n.CharacterList.NavigationBar.title
+        customView.showLoadingScreen()
         interactor.fetchCharacterList(request: .init())
     }
 
@@ -45,14 +47,27 @@ final class CharacterListViewController: UIViewController {
             customView.addLoadingFooter()
         }
     }
+
+    func stopLoading() {
+        isLoadingMore = false
+        customView.dismissLoadingScreen()
+        customView.removeLoadingFooter()
+    }
 }
 
 extension CharacterListViewController: CharacterListDisplayLogic {
     func showCharacterList(viewModel: CharacterList.FetchCharacterList.ViewModel.Success) {
-        isLoadingMore = false
-        customView.removeLoadingFooter()
+        stopLoading()
         marvelCharacters.append(contentsOf: viewModel.marvelCharacters)
         customView.addRows(numberOfRows: viewModel.marvelCharacters.count)
+    }
+
+    func showError(viewModel: CharacterList.FetchCharacterList.ViewModel.Failure) {
+        stopLoading()
+        let alertController = UIAlertController(title: viewModel.title, message: viewModel.description, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: L10n.ErrorAlertController.okAction, style: .default, handler: nil)
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
     }
 }
 

@@ -17,6 +17,15 @@ internal enum L10n {
       internal static let title = L10n.tr("Localizable", "CharacterList.NavigationBar.Title")
     }
   }
+
+  internal enum ErrorAlertController {
+    /// Please, try again later
+    internal static let description = L10n.tr("Localizable", "ErrorAlertController.Description")
+    /// Ok
+    internal static let okAction = L10n.tr("Localizable", "ErrorAlertController.OkAction")
+    /// Error
+    internal static let title = L10n.tr("Localizable", "ErrorAlertController.Title")
+  }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name vertical_whitespace_opening_braces

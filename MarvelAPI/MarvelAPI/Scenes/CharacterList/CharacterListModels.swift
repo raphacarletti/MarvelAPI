@@ -7,16 +7,15 @@ enum CharacterList {
             struct Success {
                 let marvelCharacters: [MarvelCharacter]
             }
-            struct Failure {
-
-            }
+            struct Failure {}
         }
         enum ViewModel {
             struct Success {
                 let marvelCharacters: [MarvelCharacter]
             }
             struct Failure {
-
+                let title: String
+                let description: String
             }
         }
     }

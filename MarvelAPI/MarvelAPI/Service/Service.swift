@@ -12,7 +12,7 @@ final class Service: ServiceRequest {
             case .success(let decodable): 
                 completion(.success(decodable))
             case .failure(let error):
-                break
+                completion(.failure(error))
             }
         }
     }

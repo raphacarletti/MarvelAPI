@@ -7,9 +7,12 @@ protocol CharacterListViewProtocol: AnyObject {
     func addRows(numberOfRows: Int)
     func addLoadingFooter()
     func removeLoadingFooter()
+    func showLoadingScreen()
+    func dismissLoadingScreen()
 }
 
 final class CharacterListView: UIView, CharacterListViewProtocol {
+    private var loadingView = LoadingView()
     private var tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(CharacterListTableViewCell.self, forCellReuseIdentifier: CharacterListTableViewCell.identifier)
@@ -60,5 +63,16 @@ final class CharacterListView: UIView, CharacterListViewProtocol {
 
     func removeLoadingFooter() {
         tableView.tableFooterView = nil
+    }
+
+    func showLoadingScreen() {
+        addSubview(loadingView)
+        constrain(self, loadingView) { superView, loadingView in
+            loadingView.edges == superView.edges
+        }
+    }
+
+    func dismissLoadingScreen() {
+        loadingView.removeFromSuperview()
     }
 }
