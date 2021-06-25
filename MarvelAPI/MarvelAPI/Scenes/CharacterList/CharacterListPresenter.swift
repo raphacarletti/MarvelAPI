@@ -15,6 +15,6 @@ final class CharacterListPresenter: CharacterListPresentationLogic {
     }
 
     func presentCharacterListError(response: CharacterList.FetchCharacterList.Response.Failure) {
-        view?.showError(viewModel: .init(title: L10n.ErrorAlertController.title, description: L10n.ErrorAlertController.description))
+        view?.showError(viewModel: .init(title: L10n.ErrorAlertController.title, description: L10n.ErrorAlertController.description, okButton: L10n.ErrorAlertController.okAction))
     }
 }

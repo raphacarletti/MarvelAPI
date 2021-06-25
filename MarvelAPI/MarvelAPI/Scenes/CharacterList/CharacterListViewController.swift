@@ -65,14 +65,17 @@ extension CharacterListViewController: CharacterListDisplayLogic {
     func showError(viewModel: CharacterList.FetchCharacterList.ViewModel.Failure) {
         stopLoading()
         let alertController = UIAlertController(title: viewModel.title, message: viewModel.description, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: L10n.ErrorAlertController.okAction, style: .default, handler: nil)
+        let okAction = UIAlertAction(title: viewModel.okButton, style: .default, handler: nil)
         alertController.addAction(okAction)
         present(alertController, animated: true, completion: nil)
     }
 }
 
 extension CharacterListViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let marvelCharacter = dataStore.marvelCharacters[indexPath.row]
+        router.goToCharacterDetail(with: marvelCharacter)
+    }
 }
 
 extension CharacterListViewController: UITableViewDataSource {

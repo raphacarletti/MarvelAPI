@@ -1,7 +1,7 @@
 import UIKit
 import Foundation
 
-struct MarvelResponse: Codable {
+struct MarvelCharacterResponse: Codable {
     var code: Int
     var data: MarvelCharacterDataContainer
 }

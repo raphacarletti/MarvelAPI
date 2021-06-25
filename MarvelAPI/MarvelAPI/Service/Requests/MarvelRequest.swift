@@ -3,10 +3,14 @@ import Alamofire
 
 enum MarvelRequest: Request {
     case characterList(_ offset: Int)
+    case comics(_ characterId: Int)
+
     var path: String {
         switch self {
         case .characterList:
             return "/v1/public/characters"
+        case .comics(let characterId):
+            return "/v1/public/characters/\(characterId)/comics"
         }
     }
 
@@ -23,6 +27,8 @@ enum MarvelRequest: Request {
             parameter["orderBy"] = "name"
             parameter["limit"] = ServiceConstants.responseLimit
             parameter["offset"] = offset
+        default:
+            parameter["limit"] = ServiceConstants.maxResponseLimit
         }
 
         return parameter
@@ -30,14 +36,14 @@ enum MarvelRequest: Request {
 
     var method: HTTPMethod {
         switch self {
-        case .characterList:
+        case .characterList, .comics:
             return .get
         }
     }
 
     var encoding: ParameterEncoding {
         switch self {
-        case .characterList:
+        case .characterList, .comics:
             return URLEncoding.default
         }
     }

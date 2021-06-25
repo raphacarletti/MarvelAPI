@@ -16,6 +16,7 @@ enum CharacterList {
             struct Failure {
                 let title: String
                 let description: String
+                let okButton: String
             }
         }
     }

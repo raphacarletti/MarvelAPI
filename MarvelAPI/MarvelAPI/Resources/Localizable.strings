@@ -1,7 +1,15 @@
 "CharacterList.NavigationBar.Title" = "Marvel Heroes";
 
+"CharacterDetail.NameHeader" = "Name:";
+"CharacterDetail.DescriptionHeader" = "Description:";
+"CharacterDetail.MostExpensiveMagazine" = "most expensive magazine!";
 
 //MARK - Error alert
 "ErrorAlertController.Title" = "Error";
 "ErrorAlertController.Description" = "Please, try again later";
 "ErrorAlertController.OkAction" = "Ok";
+
+//MARK - No comic alert
+"NoComicAlertController.Title" = "Sorry";
+"NoComicAlertController.Description" = "No comic found!";
+"NoComicAlertController.OkAction" = "Ok";
