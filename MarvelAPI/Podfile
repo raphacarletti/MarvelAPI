@@ -9,6 +9,7 @@ target 'MarvelAPI' do
 pod 'Alamofire', '~> 5.4.3'
 pod 'Cartography', '~> 4.0.0'
 pod 'Kingfisher', '~> 6.3.0'
+pod 'SwiftGen', '~> 6.0'
 
 
   target 'MarvelAPITests' do
