@@ -9,17 +9,17 @@ final class CharacterListViewController: UIViewController {
     private let customView: CharacterListViewProtocol & UIView
     private let interactor: CharacterListBusinessLogic
     private let router: CharacterListRoutingLogic
-
-    private var marvelCharacters: [MarvelCharacter] = []
-    private var isLoadingMore = false
+    private var dataStore: CharacterListDataStoreProtocol
 
     init(
         interactor: CharacterListBusinessLogic,
         router: CharacterListRoutingLogic,
+        dataStore: CharacterListDataStoreProtocol = CharacterListDataStore(),
         customView: CharacterListViewProtocol & UIView
     ) {
         self.interactor = interactor
         self.router = router
+        self.dataStore = dataStore
         self.customView = customView
         super.init(nibName: nil, bundle: nil)
         self.customView.dataSourceDelegate = self
@@ -42,14 +42,14 @@ final class CharacterListViewController: UIViewController {
     }
 
     func shouldLoadMore(indexPath: IndexPath) {
-        if !isLoadingMore, indexPath.row == marvelCharacters.count - 1 {
+        if !dataStore.isLoadingMore, indexPath.row == dataStore.marvelCharacters.count - 1 {
             interactor.fetchCharacterList(request: .init())
             customView.addLoadingFooter()
         }
     }
 
     func stopLoading() {
-        isLoadingMore = false
+        dataStore.isLoadingMore = false
         customView.dismissLoadingScreen()
         customView.removeLoadingFooter()
     }
@@ -58,7 +58,7 @@ final class CharacterListViewController: UIViewController {
 extension CharacterListViewController: CharacterListDisplayLogic {
     func showCharacterList(viewModel: CharacterList.FetchCharacterList.ViewModel.Success) {
         stopLoading()
-        marvelCharacters.append(contentsOf: viewModel.marvelCharacters)
+        dataStore.marvelCharacters.append(contentsOf: viewModel.marvelCharacters)
         customView.addRows(numberOfRows: viewModel.marvelCharacters.count)
     }
 
@@ -77,7 +77,7 @@ extension CharacterListViewController: UITableViewDelegate {
 
 extension CharacterListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return marvelCharacters.count
+        return dataStore.marvelCharacters.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -86,7 +86,7 @@ extension CharacterListViewController: UITableViewDataSource {
         }
 
         shouldLoadMore(indexPath: indexPath)
-        cell.set(marvelCharacter: marvelCharacters[indexPath.row])
+        cell.set(marvelCharacter: dataStore.marvelCharacters[indexPath.row])
 
         return cell
     }
