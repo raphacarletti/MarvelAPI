@@ -27,6 +27,15 @@ internal enum L10n {
     }
   }
 
+  internal enum ComicDetail {
+    /// Description:
+    internal static let descriptionHeader = L10n.tr("Localizable", "ComicDetail.DescriptionHeader")
+    /// Name:
+    internal static let nameHeader = L10n.tr("Localizable", "ComicDetail.NameHeader")
+    /// Price:
+    internal static let priceHeader = L10n.tr("Localizable", "ComicDetail.PriceHeader")
+  }
+
   internal enum ErrorAlertController {
     /// Please, try again later
     internal static let description = L10n.tr("Localizable", "ErrorAlertController.Description")

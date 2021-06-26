@@ -10,6 +10,7 @@ final class CharacterDetailRouter: CharacterDetailRoutingLogic {
     weak var viewController: UIViewController?
 
     func goToComicDetail(with comic: MarvelComic) {
-
+        let comicDetail = ComicDetailConfigurator().instantiateView(comic: comic)
+        viewController?.navigationController?.pushViewController(comicDetail, animated: true)
     }
 }

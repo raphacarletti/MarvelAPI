@@ -12,6 +12,7 @@ struct MarvelComicDataContainer: Codable {
 struct MarvelComic: Codable {
     var id: Int
     var title: String
+    var issueNumber: Int
     var comicDescription: String?
     var thumbnail: MarvelThumbnail
     var prices: [ComicPrice]
@@ -19,6 +20,7 @@ struct MarvelComic: Codable {
     enum CodingKeys: String, CodingKey {
         case id
         case title
+        case issueNumber
         case comicDescription = "description"
         case thumbnail
         case prices

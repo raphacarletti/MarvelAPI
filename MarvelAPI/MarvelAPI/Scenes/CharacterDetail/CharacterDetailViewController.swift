@@ -45,6 +45,7 @@ extension CharacterDetailViewController: CharacterDetailDisplayLogic {
     }
 
     func showComic(viewModel: CharacterDetail.FetchMostExpensiveMaganize.ViewModel.Success) {
+        customView.stopLoading()
         router.goToComicDetail(with: viewModel.marvelComic)
     }
 

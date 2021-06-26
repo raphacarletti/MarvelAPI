@@ -4,6 +4,10 @@
 "CharacterDetail.DescriptionHeader" = "Description:";
 "CharacterDetail.MostExpensiveMagazine" = "most expensive magazine!";
 
+"ComicDetail.NameHeader" = "Name:";
+"ComicDetail.DescriptionHeader" = "Description:";
+"ComicDetail.PriceHeader" = "Price:";
+
 //MARK - Error alert
 "ErrorAlertController.Title" = "Error";
 "ErrorAlertController.Description" = "Please, try again later";
